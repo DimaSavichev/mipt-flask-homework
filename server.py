@@ -3,6 +3,8 @@ from flask import jsonify
 from dotenv import dotenv_values
 from flask import request
 
+from controllers import operation
+
 app = Flask(__name__)
 
 
@@ -32,7 +34,7 @@ def get_port():
 def runner():
     a = request.args.get('a', type=int)
     b = request.args.get('b', type=int)
-    return jsonify({'sum': a + b})
+    return jsonify({'sum': operation(a, b)})
 
 
 if __name__ == "__main__":
