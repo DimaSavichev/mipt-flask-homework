@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import jsonify
 from dotenv import dotenv_values
+from flask import request
 
 app = Flask(__name__)
 
@@ -25,6 +26,13 @@ def get_port():
     if "PORT" in config:
         return config["PORT"]
     return 5000
+
+
+@app.route("/sum")
+def runner():
+    a = request.args.get('a', type=int)
+    b = request.args.get('b', type=int)
+    return jsonify({'sum': a + b})
 
 
 if __name__ == "__main__":
